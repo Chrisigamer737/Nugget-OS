@@ -43,7 +43,6 @@ void start_kernel() {
        for (g = 1; g <= 23000; g++)
        {}
    font_test();
-   
 }
 void on_enter(char *input) {
     if (compare_string(input, "HALT") == 0) {

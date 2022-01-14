@@ -41,7 +41,6 @@ static void keyboard_callback(registers_t *regs) {
         char letter = sc_ascii[(int) scancode];
         append(key_buffer, letter);
         char str[2] = {letter, '\0'};
-		clear_screen();
         print_str(20,20,str,4);
     }
 }

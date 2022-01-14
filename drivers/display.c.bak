@@ -55,6 +55,15 @@ int scroll_ln(int offset) {
  * TODO:
  * - handle illegal offset (print error message somewhere)
  */
+ void c_write_window(unsigned int x, unsigned int y, unsigned short c)
+{
+  if ((win_offset + y) >= BUFFER_ROWS) {
+    int overlap = ((win_offset + y) - BUFFER_ROWS);
+    *VIDEO_ADDR(x,y) = screen_buffer[overlap][x] = c;
+  } else {
+    *VIDEO_ADDR(x,y) = screen_buffer[win_offset + y][x] = c;
+  }
+}
 void print_string(char *string) {
     int offset = get_cursor();
     int i = 0;
