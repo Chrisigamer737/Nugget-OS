@@ -371,6 +371,11 @@ void print_str(int pos_x, int pos_y, char *string, int c) {
 	int a = 0;
 	int b = pos_y;
 	while (string[i] != 0) {
+		if (string[i] = ' ') {
+			pos_x=pos_x+20;
+			
+			
+		}
 		if (i != 0) {
 			a = a + pos_x+20;
 		}
