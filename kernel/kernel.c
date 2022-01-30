@@ -31,18 +31,13 @@ void* alloc(int n) {
 void start_kernel() {
   isr_install();
   asm volatile("sti");
-  init_keyboard();
+  //sinit_keyboard();
   init_dynamic_mem();
-  
-  clear_screen();
+  //clear_screen();
   //clear_screen();
   //print_str_rainbow(20,20,"ABCDEFGHIJKLMNOPQRSTUVWRXYZ");
   //font_test();
-  int f,g;
-   for (f = 1; f <= 23000; f++)
-       for (g = 1; g <= 23000; g++)
-       {}
-   font_test();
+  font_test();
    
 }
 void on_enter(char *input) {
