@@ -1,0 +1,11 @@
+--2022-01-21 23:31:18--  https://www.zap.org.au/projects/console-fonts-zap/src/zap-vga16.psf
+Resolving www.zap.org.au (www.zap.org.au)... 129.94.172.224
+Connecting to www.zap.org.au (www.zap.org.au)|129.94.172.224|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5312 (5.2K)
+Saving to: ‘zap-vga16.psf’
+
+     0K .....                                                 100%  528M=0s
+
+2022-01-21 23:31:18 (528 MB/s) - ‘zap-vga16.psf’ saved [5312/5312]
+
