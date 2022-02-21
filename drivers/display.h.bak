@@ -4,12 +4,10 @@
 #define MAX_ROWS 320
 #define MAX_COLS 200
 #define WHITE_ON_BLACK 0x0f
-#define BackgroundColor 0
+#define BackgroundColor 2
 /* Screen i/o ports */
 #define REG_SCREEN_CTRL 0x3d4
 #define REG_SCREEN_DATA 0x3d5
-#define VIDEO_BASE_ADDR    0xA0000
-#define VIDEO_ADDR(x,y)    (unsigned short *)(VIDEO_BASE_ADDR + 2 * ((y) * SCREEN_X_SIZE + (x)))
 /* Public kernel API */
 void print_string(char *string);
 

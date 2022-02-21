@@ -1,22 +1,24 @@
 #include "display.h"
 #include "font2.h"
+#include <limits.h>
 /* the linear framebuffer */
-extern char *fb;
+
+uint16_t *fb = 0xA0000;
 uint16_t *unicode;
 /* number of bytes in each line, it's possible it's not screen width * bytesperpixel! */
-extern int scanline;
+int scanline = 320;
 /* import our font that's in the object file we've created above */
-extern char _binary_font3_psf_start;
-extern char _binary_font3_psf_start;
-extern char _binary_font3_psf_end;
+extern char _binary_drivers_font3_psf_start;
+extern char _binary_drivers_font3_psf_size;
+extern char _binary_drivers_font3_psf_end;
  
-#define PIXEL uint32_t   /* pixel pointer */
+#define PIXEL uint32_t  /* pixel pointer */
  
 void psf_init()
 {
     uint16_t glyph = 0;
     /* cast the address to PSF header struct */
-    PSF_font *font = (PSF_font*)&_binary_font3_psf_start;
+    PSF_font *font = (PSF_font*)&_binary_drivers_font3_psf_start;
     /* is there a unicode table? */
     if (font->flags) {
         unicode = NULL;
@@ -25,13 +27,15 @@ void psf_init()
  
     /* get the offset of the table */
     char *s = (char *)(
-    (unsigned char*)&_binary_font3_psf_start +
+    (unsigned char*)&_binary_drivers_font3_psf_start +
       font->headersize +
       font->numglyph * font->bytesperglyph
     );
     /* allocate memory for translation table */
-    unicode = calloc(USHRT_MAX, 2);
-    while(s>_binary_font3_psf_end) {
+	//for (int i;i <= 255; i++){
+		unicode = alloc(2);
+	//}
+    while(s>_binary_drivers_font3_psf_end) {
         uint16_t uc = (uint16_t)((unsigned char *)s[0]);
         if(uc == 0xFF) {
             glyph++;
@@ -67,7 +71,7 @@ void putchar(
     uint32_t fg, uint32_t bg)
 {
     /* cast the address to PSF header struct */
-    PSF_font *font = (PSF_font*)&_binary_font3_psf_start;
+    PSF_font *font = (PSF_font*)&_binary_drivers_font3_psf_start;
     /* we need to know how many bytes encode one row */
     int bytesperline=(font->width+7)/8;
     /* unicode translation */
@@ -77,7 +81,7 @@ void putchar(
     /* get the glyph for the character. If there's no
        glyph for a given character, we'll display the first glyph. */
     unsigned char *glyph =
-     (unsigned char*)&_binary_font3_psf_start +
+     (unsigned char*)&_binary_drivers_font3_psf_start +
      font->headersize +
      (c>0&&c<font->numglyph?c:0)*font->bytesperglyph;
     /* calculate the upper left corner on screen where we want to display.

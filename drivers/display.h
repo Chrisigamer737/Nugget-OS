@@ -4,7 +4,7 @@
 #define MAX_ROWS 320
 #define MAX_COLS 200
 #define WHITE_ON_BLACK 0x0f
-#define BackgroundColor 0
+#define BackgroundColor 1
 /* Screen i/o ports */
 #define REG_SCREEN_CTRL 0x3d4
 #define REG_SCREEN_DATA 0x3d5

@@ -4,14 +4,16 @@
 #include "../drivers/display.h"
 #include "../drivers/keyboard.h"
 #include "../drivers/font.h"
+#include "../drivers/font2.h"
 #include "util.h"
 #include "mem.h"
 #include <stdint.h>
+
 //#include <stddef.h>
 void* alloc(int n) {
     int *ptr = (int *) mem_alloc(n * sizeof(int));
     if (ptr == NULL_POINTER) {
-        print_string("Memory not allocated.\n");
+       // print_string("Memory not allocated.\n");
     } else {
         // Get the elements of the array
         for (int i = 0; i < n; ++i) {
@@ -33,11 +35,13 @@ void start_kernel() {
   asm volatile("sti");
   //sinit_keyboard();
   init_dynamic_mem();
+  psf_init();
   //clear_screen();
   //clear_screen();
   //print_str_rainbow(20,20,"ABCDEFGHIJKLMNOPQRSTUVWRXYZ");
   //font_test();
-  font_test();
+  //font_test();
+  putchar(20,20,20,0xffffff,0x000000);
    
 }
 void on_enter(char *input) {

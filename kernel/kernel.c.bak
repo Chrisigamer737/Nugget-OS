@@ -4,11 +4,12 @@
 #include "../drivers/display.h"
 #include "../drivers/keyboard.h"
 #include "../drivers/font.h"
+#include "../drivers/font2.h"
 #include "util.h"
 #include "mem.h"
 #include <stdint.h>
+
 //#include <stddef.h>
-int main();
 void* alloc(int n) {
     int *ptr = (int *) mem_alloc(n * sizeof(int));
     if (ptr == NULL_POINTER) {
@@ -32,14 +33,15 @@ void* alloc(int n) {
 void start_kernel() {
   isr_install();
   asm volatile("sti");
-  init_keyboard();
+  //sinit_keyboard();
   init_dynamic_mem();
-  main();
+  psf_init();
   //clear_screen();
   //clear_screen();
   //print_str_rainbow(20,20,"ABCDEFGHIJKLMNOPQRSTUVWRXYZ");
   //font_test();
-  // font_test();
+  //font_test();
+  putchar(20,20,20,0xffffff,0x000000);
    
 }
 void on_enter(char *input) {

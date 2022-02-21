@@ -14,3 +14,5 @@ typedef struct {
     uint32_t width;         /* width in pixels */
 } PSF_font;
 void psf_init();
+
+void putchar(unsigned short int c, int cx, int cy, uint32_t fg, uint32_t bg);
